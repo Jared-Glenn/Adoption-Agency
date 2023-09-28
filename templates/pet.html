@@ -9,7 +9,7 @@
 <body>
     <h1>{{ pet.name }}</h1>
 
-    <img src="{{ pet.image_url }}" alt="Picture of {{ pet.name }}">
+    <img class="pet-photo" src="{{ pet.photo_url }}" alt="Picture of {{ pet.name }}">
 
     <div>
         <p><strong>Species: </strong>{{ pet.species }}</p>
@@ -24,6 +24,8 @@
         <br>
         <p>{{ pet.notes }}</p>
     </div>
+
+    <button class="edit-pet-button" onclick="location.href='/{{ pet.id }}/edit';">Edit {{ pet.name }}</button>
 
 
 </body>

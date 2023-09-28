@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, IntegerField
 from wtforms.validators import InputRequired, Optional, AnyOf, URL, NumberRange
 
-class AddPetForm(FlaskForm):
+class PetForm(FlaskForm):
     """Form for adding pets."""
     
     name = StringField("Name")

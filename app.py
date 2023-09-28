@@ -1,9 +1,9 @@
 """Adoption application."""
 
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Pet
-from forms import AddPetForm
+from forms import PetForm
 
 app = Flask(__name__)
 
@@ -47,7 +47,7 @@ def pet_page(pet_id):
 def add_pet():
     """Form and submission for a new pet."""
     
-    form = AddPetForm()
+    form = PetForm()
     
     if form.validate_on_submit():
         name = form.name.data
@@ -64,3 +64,29 @@ def add_pet():
         return redirect(f"/{ new_pet.id }")
     else:
         return render_template("new_pet.html", form=form)
+    
+
+# Edit a pet
+
+@app.route('/<int:pet_id>/edit', methods=["GET", "POST"])
+def edit_pet(pet_id):
+    """"Edit a pet."""
+    
+    pet = Pet.query.get_or_404(pet_id)
+    form = PetForm(obj=pet)
+    
+    if form.validate_on_submit():
+        pet.name = form.name.data
+        pet.species = form.species.data
+        pet.photo_url = form.photo_url.data
+        pet.age = form.age.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
+        
+        db.session.commit()
+        flash(f"Pet {pet_id} updated!")
+        return redirect(f"/{pet_id}")
+    
+    else:
+        return render_template("edit_pet.html", form=form)
+
