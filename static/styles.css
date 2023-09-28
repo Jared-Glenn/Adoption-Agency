@@ -1,0 +1,32 @@
+
+
+.pet-div {
+    float: left;
+    padding: 1rem;
+}
+
+.add-pet-form-button:after{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.add-pet-form-link {
+    display: block;
+    clear: both;
+}
+
+.pet-photo {
+    max-width: 12rem;
+}
+
+.available {
+    color: rgb(0, 170, 0);
+}
+
+.not-available {
+    color: red;
+}
